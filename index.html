@@ -42,15 +42,26 @@
 
         let words = ['guns', 'boots', 'horse', 'badge'];
         let underScore = [];
+
         let arrNum = Math.floor(Math.random() * words.length);
         let wordPicked = words[arrNum];
+        console.log(wordPicked);
+
         let createUnderscore = () => {
             for (let i = 0; i < wordPicked.length; i++) {
                 underScore.push('_');
             }
             return underScore;
         }
-
+        console.log(createUnderscore());
+        document.addEventListener("keypress", (event) => {
+            let keycode = event.keycode;
+            let keyWord = String.fromCharCode(keycode);
+            if (keyWord.indexOf(wordPicked) > -1) {
+                console.log(true);
+            }
+            // document.getElementById(userchoice-text).innerHTML=
+        });
         // document.onkeyup = function (event) {
 
         //     // Determines which key was pressed.
