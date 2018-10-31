@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hangman</title>
+</head>
+<!-- <script> src = "assets/javascript/game.js"</script> -->
+
+<body>
+    <h1>Welcome to the Wild West</h1>
+    <div class="container">
+        <header>
+            <h2>They will hang you for any number of sins!</h2>
+            <h3>Stay alive by guessing the Sheriff's favorite things.</h3>
+        </header>
+        <img> this will be a picture of a hanging noose;>
+        <div class="underscores"> _ _ _ _</div>
+    </div>
+    <h4>type the letters you think belong in the empty spaces</h4>
+    <div class="userchoice-text">You chose:</div>
+    <p id="wins-text"></p>
+    <p id="losses-text"></p>
+
+    <!-- 1. Press any key to get started! Screen will disply the key pressed. If -the key is in the word, the letter will be displayed
+    in the correct position. Else -Screen will display the letter as a used guess. The letter will not display a secomd time.
+    2. Every guess is tallied as a # of guesses remaining counting down from 6 to 0. each key press will count as a guess.
+    3. Wins: (# of times user guessed the word correctly). 
+4.  After the user wins/loses the game should automatically choose another
+    word and make the user play it. -->-->
+
+    <script type="text/javascript">
+        var computerChoices = ["g", "u", "n", "s"];
+        var wins = 0;
+        var losses = 10;
+        var userChoiceText = document.getElementById("userchoice-text");
+        var computerChoiceText = document.getElementById("computerchoice-text");
+        var winsText = document.getElementById("wins-text");
+        var lossesText = document.getElementById("losses-text");
+
+        let words = ['guns', 'boots', 'horse', 'badge'];
+        let underScore = [];
+        let arrNum = Math.floor(Math.random() * words.length);
+        let wordPicked = words[arrNum];
+        let createUnderscore = () => {
+            for (let i = 0; i < wordPicked.length; i++) {
+                underScore.push('_');
+            }
+            return underScore;
+        }
+
+        // document.onkeyup = function (event) {
+
+        //     // Determines which key was pressed.
+        //     var userGuess = event.key;
+
+        //     // Only run the following code block if the user presses "r" or "p" or "s".
+        //     if ((userGuess === "g") || (userGuess === "u") || (userGuess === "n") || (userGuess === "s")) {
+        //         wins++;
+        //     }
+        //     else if ((userGuess !== "g") || (userGuess !== "u") || (userGuess !== "n") || (userGuess !== "s")) {
+        //         losses--;
+        //     }
+        //     userChoiceText.textContent += " " + userGuess;
+        //     winsText.textContent = "wins: " + wins;
+        //     lossesText.textContent = "losses: " + losses;
+        // };
+    </script>
+</body>
+
+</html>
