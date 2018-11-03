@@ -10,77 +10,68 @@
 <!-- <script> src = "assets/javascript/game.js"</script> -->
 
 <body>
-    <h1>Welcome to the Wild West</h1>
-    <div class="container">
-        <header>
-            <h2>They will hang you for any number of sins!</h2>
-            <h3>Stay alive by guessing the Sheriff's favorite things.</h3>
-        </header>
-        <img> this will be a picture of a hanging noose;>
-        <div class="underscore"> </div>
-    </div>
-    <h4>type the letters you think belong in the empty spaces</h4>
-    <div class="userchoice-text">You chose:</div>
-    <p id="wins-text"></p>
-    <p id="losses-text"></p>
 
-    <!-- 1. Press any key to get started! Screen will disply the key pressed. If -the key is in the word, the letter will be displayed
-    in the correct position. Else -Screen will display the letter as a used guess. The letter will not display a secomd time.
-    2. Every guess is tallied as a # of guesses remaining counting down from 6 to 0. each key press will count as a guess.
-    3. Wins: (# of times user guessed the word correctly). 
-4.  After the user wins/loses the game should automatically choose another
-    word and make the user play it. -->-->
+</body>
+<div class="container">
+    <header>
+        <h1>Welcome to the Wild West</h1>
+        <h2>They will hang you for any number of sins!</h2>
+        <h3>Stay alive by guessing the Sheriff's favorite things.</h3>
+        <h4>type the letters you think belong in the empty spaces</h4>
+    </header>
+    <img> this will be a picture of a hanging noose;>
+    <div class="underscore"> </div>
+    <div class="rightGuess">right guess</div>
+    <div class="wrongGues">wrong gues</div>
+</div>
+<script type="text/javascript">
 
-    <script type="text/javascript">
+    //These are the words the computer can choose//
+    let words = ['guns', 'boots', 'horse', 'badge'];
 
-        var wins = 0;
-        var losses = 10;
-        var userChoiceText = document.getElementById("userchoice-text");
+    //computer generates random word based on the array "words". Computer creates underscores corresponding with letters in the word picked//
+    let arrNum = Math.floor(Math.random() * words.length);
+    let wordPicked = words[arrNum];
+    let underScore = [];
 
-        var winsText = document.getElementById("wins-text");
-        var lossesText = document.getElementById("losses-text");
-
-        //These are the words the computer can choose//
-        let words = ['guns', 'boots', 'horse', 'badge'];
-
-        //computer generates random word based on the array "words". Computer creates underscores corresponding with letters in the word picked//
-        let arrNum = Math.floor(Math.random() * words.length);
-        let wordPicked = words[arrNum];
-        let underScore = [];
-
-        let docUnderScore = document.getElementsByClassName('underscore');
-        console.log(wordPicked);
-        let createUnderscore = () => {
-            for (let i = 0; i < wordPicked.length; i++) {
-                underScore.push('_');
-                docUnderScore[0].innerHtml = underScore.join('');
-            }
-            return underScore;
+    let docUnderScore = document.getElementsByClassName('underscore');
+    let docRightGuess = document.getElementsByClassName('rightGuess');
+    let docWrongGuess = document.getElementsByClassName('wrongGuess');
+    console.log(wordPicked);
+    let createUnderscore = () => {
+        for (let i = 0; i < wordPicked.length; i++) {
+            underScore.push('_');
+            docUnderScore[0].innerHTML = underScore.join('');
         }
+        return underScore;
+    }
 
 
-        let rightWord = [];
-        let wrongWord = [];
-        //get user's gues//
-        document.addEventListener("keypress", (event) => {
-            let keyword = String.fromCharCode(event.keyCode);
-            //if user's guess is right//
-            if (wordPicked.indexOf(keyword) > -1) {
-                rightWord.push(keyword);
+    let rightWord = [];
+    let wrongWord = [];
+    //get user's gues//
+    document.addEventListener("keypress", (event) => {
+        let keyword = String.fromCharCode(event.keyCode);
+        //if user's guess is right//
+        if (wordPicked.indexOf(keyword) > -1) {
+            rightWord.push(keyword);
+            //replace underscore with right letter
+            underScore[wordPicked.indexOf(keyword)] = keyword;
+            docUnderScore[0].innerHTML = underScore.join('');
+            docRightGuess[0].innerHTML = rightWord
 
-                underScore[wordPicked.indexOf(keyword)] = keyword;
-                //If user's guess is wrong//
-                if (underScore.join('') == wordPicked) {
-                    alert('You Win');
-                }
-            } else {
-                wrongWord.push(keyword);
-                console.log(wrongWord);
+            //if user guess matches
+            if (underScore.join('') == wordPicked) {
+                alert('You Win');
             }
+        }
+        else {
+            wrongWord.push(keyword);
+            docWrongGuess[0].innerHTML = wrongGuess;
+        }
+    });
 
-        })
-
-    </script>
+</script>
 </body>
 
 </html>
