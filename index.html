@@ -17,7 +17,7 @@
             <h3>Stay alive by guessing the Sheriff's favorite things.</h3>
         </header>
         <img> this will be a picture of a hanging noose;>
-        <div class="underscores"> _ _ _ _</div>
+        <div class="underscore"> </div>
     </div>
     <h4>type the letters you think belong in the empty spaces</h4>
     <div class="userchoice-text">You chose:</div>
@@ -32,52 +32,54 @@
     word and make the user play it. -->-->
 
     <script type="text/javascript">
-        var computerChoices = ["g", "u", "n", "s"];
+
         var wins = 0;
         var losses = 10;
         var userChoiceText = document.getElementById("userchoice-text");
-        var computerChoiceText = document.getElementById("computerchoice-text");
+
         var winsText = document.getElementById("wins-text");
         var lossesText = document.getElementById("losses-text");
 
+        //These are the words the computer can choose//
         let words = ['guns', 'boots', 'horse', 'badge'];
-        let underScore = [];
 
+        //computer generates random word based on the array "words". Computer creates underscores corresponding with letters in the word picked//
         let arrNum = Math.floor(Math.random() * words.length);
         let wordPicked = words[arrNum];
-        console.log(wordPicked);
+        let underScore = [];
 
+        let docUnderScore = document.getElementsByClassName('underscore');
+        console.log(wordPicked);
         let createUnderscore = () => {
             for (let i = 0; i < wordPicked.length; i++) {
                 underScore.push('_');
+                docUnderScore[0].innerHtml = underScore.join('');
             }
             return underScore;
         }
-        console.log(createUnderscore());
+
+
+        let rightWord = [];
+        let wrongWord = [];
+        //get user's gues//
         document.addEventListener("keypress", (event) => {
-            let keycode = event.keycode;
-            let keyWord = String.fromCharCode(keycode);
-            if (keyWord.indexOf(wordPicked) > -1) {
-                console.log(true);
+            let keyword = String.fromCharCode(event.keyCode);
+            //if user's guess is right//
+            if (wordPicked.indexOf(keyword) > -1) {
+                rightWord.push(keyword);
+
+                underScore[wordPicked.indexOf(keyword)] = keyword;
+                //If user's guess is wrong//
+                if (underScore.join('') == wordPicked) {
+                    alert('You Win');
+                }
+            } else {
+                wrongWord.push(keyword);
+                console.log(wrongWord);
             }
-            // document.getElementById(userchoice-text).innerHTML=
-        });
-        // document.onkeyup = function (event) {
 
-        //     // Determines which key was pressed.
-        //     var userGuess = event.key;
+        })
 
-        //     // Only run the following code block if the user presses "r" or "p" or "s".
-        //     if ((userGuess === "g") || (userGuess === "u") || (userGuess === "n") || (userGuess === "s")) {
-        //         wins++;
-        //     }
-        //     else if ((userGuess !== "g") || (userGuess !== "u") || (userGuess !== "n") || (userGuess !== "s")) {
-        //         losses--;
-        //     }
-        //     userChoiceText.textContent += " " + userGuess;
-        //     winsText.textContent = "wins: " + wins;
-        //     lossesText.textContent = "losses: " + losses;
-        // };
     </script>
 </body>
 
